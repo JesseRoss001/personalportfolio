@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { useAppContext } from "../appContext";
 import { Link as ScrollLink } from "react-scroll";
 import { Link, useLocation } from "react-router-dom";
@@ -9,7 +8,8 @@ import { Icon } from "@iconify/react";
 // Components
 import { Container, Nav, Navbar } from "react-bootstrap";
 // Images
-import Logo from "./defaultNavLogo.svg";
+import { navLogoLight, navLogoDark } from "../data";
+
 
 // #region styled-components
 const StyledSwitch = styled.label`
@@ -68,17 +68,13 @@ function ThemeToggle() {
 // #endregion
 
 // #region component
-const propTypes = {
-  Logo: PropTypes.node.isRequired,
-};
 
-const defaultProps = {
-  Logo: Logo,
-};
 
-export default function NavBar({ Logo }) {
+
+export default function NavBar() {
   const { theme, isExpanded, closeExpanded, toggleExpanded } = useAppContext();
   const { pathname } = useLocation();
+  const logo = theme === "dark" ? navLogoDark : navLogoLight;
   const navLinks = {
     routes: [
       { id: "1R", name: "Home", route: "/" },
@@ -106,15 +102,10 @@ export default function NavBar({ Logo }) {
         fixed="top"
       >
         <Container>
-          <Navbar.Brand>
-            <img
-              alt="Logo"
-              src={Logo}
-              width="35"
-              height="35"
-              className="rounded-circle"
-            />
-          </Navbar.Brand>
+        <Navbar.Brand>
+      <img alt="Logo" src={logo} width="35" height="35" className="rounded-circle bg-transparent" />
+    </Navbar.Brand>
+
           <Navbar.Toggle
             aria-controls="responsive-navbar-nav"
             onClick={toggleExpanded}
@@ -165,6 +156,5 @@ export default function NavBar({ Logo }) {
   );
 }
 
-NavBar.propTypes = propTypes;
-NavBar.defaultProps = defaultProps;
+
 // #endregion

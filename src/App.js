@@ -10,14 +10,14 @@ import { fetchGitHubReops } from "./pages/allProjectsSlice";
 import { HashRouter, Routes, Route } from "react-router-dom";
 import { Element } from "react-scroll";
 import { ThemeProvider } from "styled-components";
-// Data
-import { navLogo } from "./data";
+
 // Components
 import { Container } from "react-bootstrap";
 import { Loading } from "./components/globalStyledComponents";
 import ScrollToTop from "./components/ScrollToTop";
 import GlobalStyles from "./components/GlobalStyles";
 import NavBar from "./components/NavBar";
+
 // Pages
 import Home from "./pages/Home";
 import AllProjects from "./pages/AllProjects";
@@ -43,22 +43,24 @@ export default function App() {
   const error = useSelector(selectError);
   const dispatch = useDispatch();
 
-  React.useEffect(
-    function () {
-      const updateTheme = () =>
-        darkMode ? setTheme("dark") : setTheme("light");
-      updateTheme();
-      dispatch(fetchGitHubInfo());
-      dispatch(fetchGitHubReops());
-    },
-    [setTheme, dispatch]
-  );
+  React.useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleChange = (e) => {
+      setTheme(e.matches ? "dark" : "light");
+    };
 
-  window
-    .matchMedia("(prefers-color-scheme: dark)")
-    .addEventListener("change", (e) =>
-      e.matches ? setTheme("dark") : setTheme("light")
-    );
+    mediaQuery.addEventListener("change", handleChange);
+
+    const updateTheme = () =>
+      darkMode ? setTheme("dark") : setTheme("light");
+    updateTheme();
+    dispatch(fetchGitHubInfo());
+    dispatch(fetchGitHubReops());
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleChange);
+    };
+  }, [setTheme, dispatch]);
 
   if (isLoading) {
     return (
@@ -85,7 +87,7 @@ export default function App() {
           <ScrollToTop />
           <GlobalStyles />
           <Element name={"Home"} id="home">
-            <NavBar Logo={navLogo} />
+            <NavBar /> {/* Updated this line */}
           </Element>
           <Routes>
             <Route exact path="/" element={<Home />} />

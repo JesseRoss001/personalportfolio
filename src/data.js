@@ -2,11 +2,12 @@
 import { Icon } from "@iconify/react";
 
 // Navbar Logo image (uncomment below and import your image)
-// import newLogo from "./images/yourFileName"
+
 
 // Projects Images (add your images to the images directory and import below)
 import Logo from "./images/logo.svg";
-
+import logoLight from "./images/logoLight.svg";
+import logoDark from "./images/logoDark.svg";
 // Hero Images (add your images to the /images directory with the same names)
 import HeroLight from "./images/hero-light.jpg";
 import HeroDark from "./images/hero-dark.jpg";
@@ -21,7 +22,10 @@ export { HeroDark as Dark };
 export const githubUsername = "jesseross001";
 
 // Navbar Logo image
-export const navLogo = undefined;
+
+
+export const navLogoLight = logoLight;
+export const navLogoDark = logoDark;
 
 // Blog link icon - https://icon-sets.iconify.design/
 export const Blog = <Icon icon="ph:link-bold" />;
