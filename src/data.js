@@ -9,11 +9,14 @@ import Logo from "./images/logo.svg";
 import logoLight from "./images/logoLight.svg";
 import logoDark from "./images/logoDark.svg";
 // Hero Images (add your images to the /images directory with the same names)
-import HeroLight from "./images/hero-light.jpg";
-import HeroDark from "./images/hero-dark.jpg";
+import DarkPhone from "./images/darkherosm.png";
+import DarkiPad from "./images/darkheromd.png";
+import DarkLaptop from "./images/darkherolg.png";
+import LightPhone from "./images/lightherosm.png";
+import LightiPad from "./images/lightheromd.png";
+import LightLaptop from "./images/lightherolg.png";
 // If you change the import names above then you need to change the export names below
-export { HeroLight as Light };
-export { HeroDark as Dark };
+export { DarkPhone, DarkiPad, DarkLaptop, LightPhone, LightiPad, LightLaptop };
 
 /* START HERE
  **************************************************************

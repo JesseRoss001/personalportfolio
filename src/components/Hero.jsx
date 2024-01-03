@@ -2,12 +2,15 @@ import { useSelector } from "react-redux";
 import { selectData } from "../pages/homeSlice";
 import { Link } from "react-scroll";
 import styled from "styled-components";
-// Icons
 import { Icon } from "@iconify/react";
-// Media
 import Logo from "../images/logo.svg";
-import { Light, Dark } from "../data";
-// Components
+// Import your images
+import DarkPhone from "../images/darkherosm.png";
+import DarkiPad from "../images/darkheromd.png";
+import DarkLaptop from "../images/darkherolg.png";
+import LightPhone from "../images/lightherosm.png";
+import LightiPad from "../images/lightheromd.png";
+import LightLaptop from "../images/lightherolg.png";
 import { Col, Container, Row } from "react-bootstrap";
 import { Spin } from "./globalStyledComponents";
 import SocialLinks from "./SocialLinks";
@@ -19,6 +22,30 @@ const StyledHero = styled.header`
   max-width: 1920px;
   margin: 0 auto;
   min-height: calc(100vh - var(--nav-height));
+  background-size: cover;
+  background-position: center;
+
+  // Default background for mobile
+  background-image: ${({ theme }) =>
+    theme.name === "light"
+      ? `url(${LightPhone})`
+      : `url(${DarkPhone})`};
+
+  // Override for iPad
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    background-image: ${({ theme }) =>
+      theme.name === "light"
+        ? `url(${LightiPad})`
+        : `url(${DarkiPad})`};
+  }
+
+  // Override for Laptop
+  @media screen and (min-width: 1025px) {
+    background-image: ${({ theme }) =>
+      theme.name === "light"
+        ? `url(${LightLaptop})`
+        : `url(${DarkLaptop})`};
+  }
 
   &::before {
     content: "";
@@ -27,14 +54,14 @@ const StyledHero = styled.header`
     left: 0;
     width: 100%;
     height: 100%;
-    background: ${({ theme }) =>
-      theme.name === "light"
-        ? "linear-gradient(135deg, var(--primary), var(--bs-light))"
-        : "linear-gradient(135deg, var(--primary), var(--bs-dark))"};
+    background: linear-gradient(
+      135deg,
+      var(--primary),
+      ${({ theme }) => (theme.name === "light" ? "var(--bs-light)" : "var(--bs-dark)")}
+    );
     z-index: -2;
   }
 
-  /* Overlay for contrast */
   &::after {
     content: "";
     position: absolute;
@@ -56,26 +83,6 @@ const StyledHero = styled.header`
   @media (prefers-reduced-motion: no-preference) {
     .hero-img {
       animation: ${Spin} infinite 20s linear;
-    }
-  }
-
-  @media screen and (min-width: 1180px) {
-    &::before {
-      background: ${({ theme }) =>
-        theme.name === "light"
-          ? `url(${Light}) top center fixed no-repeat`
-          : `url(${Dark}) top center fixed no-repeat`};
-      background-size: 100vw auto;
-    }
-  }
-
-  @media screen and (min-width: 1367px) {
-    &::before {
-      background: ${({ theme }) =>
-        theme.name === "light"
-          ? `url(${Light}) center center fixed no-repeat`
-          : `url(${Dark}) center center fixed no-repeat`};
-      background-size: cover;
     }
   }
 `;
@@ -103,7 +110,7 @@ export default function Hero() {
         </Row>
         <Row className="align-items-end down-container">
           <Col className="m-4 text-center">
-            <Link to={"About"} className="link-icons">
+            <Link to="About" className="link-icons">
               <Icon icon="fa6-solid:circle-chevron-down" />
             </Link>
           </Col>
