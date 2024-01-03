@@ -15,8 +15,11 @@ import DarkLaptop from "./images/darkherolg.png";
 import LightPhone from "./images/lightherosm.png";
 import LightiPad from "./images/lightheromd.png";
 import LightLaptop from "./images/lightherolg.png";
+// Import your images for the flip card
+import FrontImage from "./images/frontImage.jpg"; // Replace with path to your front image
+import BackImage from "./images/backImage.jpg"; // Replace with path to your back image
 // If you change the import names above then you need to change the export names below
-export { DarkPhone, DarkiPad, DarkLaptop, LightPhone, LightiPad, LightLaptop };
+export { DarkPhone, DarkiPad, DarkLaptop, LightPhone, LightiPad, LightLaptop , FrontImage, BackImage};
 
 /* START HERE
  **************************************************************
