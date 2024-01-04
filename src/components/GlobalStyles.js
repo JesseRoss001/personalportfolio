@@ -7,7 +7,7 @@ Variables
 ===============
 */
 :root {
-  --primary-light: #b0edfd;
+  --primary-light: #ffdcf1;
   /* Primary Color */
   --primary: #61DBFB;
   --primary-dark: #316e7e;
