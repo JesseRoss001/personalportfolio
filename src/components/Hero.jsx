@@ -18,7 +18,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   :root {
-    --electric-blue: #1e90ff; // Define electric blue color
+    --electric-blue: #61DBFB; // Define electric blue color
   }
 `;
 
@@ -115,9 +115,9 @@ export default function Hero() {
             </Col>
           </Row>
           <Row className="align-items-center justify-content-center">
-            <Col className="text-center">
+            <Col className="text-center ">
               <Link to="About" className="scroll-down">
-                <Icon icon="fa6-solid:circle-chevron-down" />
+                <Icon icon="fa6-solid:circle-chevron-down" className="fs-1" />
               </Link>
             </Col>
           </Row>
