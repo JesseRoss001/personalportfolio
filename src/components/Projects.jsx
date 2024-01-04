@@ -9,7 +9,7 @@ import {
 import { Link } from "react-router-dom";
 import { Element } from "react-scroll";
 // Data
-import { filteredProjects } from "../data";
+import { filteredProjects, githubUsername } from "../data";
 // Icons
 import { Icon } from "@iconify/react";
 // Components
@@ -24,23 +24,29 @@ export default function Projects() {
   const error = useSelector(selectError);
   const data = useSelector(selectData);
 
-  React.useEffect(
-    function () {
-      const tempData = [];
-      data.forEach((el, i) => (tempData[i] = Object.create(el)));
-      if (data.length !== 0 && filteredProjects.length !== 0) {
-        const tempArray = tempData.filter((obj) =>
-          filteredProjects.includes(obj.name)
-        );
-        tempArray.length !== 0
-          ? setMainProjects([...tempArray])
-          : setMainProjects([...tempData.slice(0, 3)]);
-      } else {
-        setMainProjects([...tempData.slice(0, 3)]);
-      }
-    },
-    [data]
-  );
+  React.useEffect(() => {
+    async function fetchAndSortRepos() {
+      const reposResponse = await fetch(`https://api.github.com/users/${githubUsername}/repos`);
+      const repos = await reposResponse.json();
+
+      const reposWithCommits = await Promise.all(repos.map(async (repo) => {
+        const commitsResponse = await fetch(`https://api.github.com/repos/${repo.full_name}/commits`);
+        const commits = await commitsResponse.json();
+        return { ...repo, latestCommitDate: new Date(commits[0].commit.committer.date) };
+      }));
+
+      // Sort by latest commit date
+      reposWithCommits.sort((a, b) => b.latestCommitDate - a.latestCommitDate);
+
+      // Filter and update state
+      const filteredSortedProjects = reposWithCommits.filter(repo =>
+        filteredProjects.includes(repo.name)
+      );
+      setMainProjects(filteredSortedProjects.length !== 0 ? filteredSortedProjects : reposWithCommits.slice(0, 3));
+    }
+
+    fetchAndSortRepos();
+  }, []);
 
   return (
     <Element name={"Projects"} id="projects">
