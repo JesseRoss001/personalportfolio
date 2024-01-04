@@ -22,7 +22,7 @@ export {darkBackground,lightBackground,lightfrontimage,darkfrontimage};
  **************************************************************
   Add your GitHub username (string - "YourUsername") below.
 */
-export const githubUsername = "jesseross001";
+export const githubUsername = "JesseRoss001";
 
 // Navbar Logo image
 
