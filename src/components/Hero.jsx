@@ -2,57 +2,43 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { selectData } from "../pages/homeSlice";
 import { Link } from "react-scroll";
-import styled from "styled-components";
-import { useAppContext } from "../appContext";  // Make sure this is correctly imported
+import styled, { createGlobalStyle } from "styled-components";
+import { useAppContext } from "../appContext";
 import { Icon } from "@iconify/react";
 import { Col, Container, Row } from "react-bootstrap";
 import SocialLinks from "./SocialLinks";
+import { darkBackground, lightBackground, lightfrontimage, darkfrontimage } from "../data";
 
-// Import your images
-import { darkBackground, lightBackground, lightfrontimage, darkfrontimage } from "../data";  // Assuming these imports are correct
+// Global style to import Montserrat font and define electric light blue color
+const GlobalStyle = createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;700;900&display=swap');
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  :root {
+    --electric-blue: #1e90ff; // Define electric blue color
+  }
+`;
 
 const StyledHero = styled.header`
   position: relative;
   display: grid;
   place-items: center;
-  max-width: 1920px;
-  margin: 0;
-  min-height: 100vh;  // Ensure it does not exceed 100vh on any screen size
+  max-width: 100%;
+  margin: 0 auto;
+  min-height: 100vh; // Adjusted for full viewport height
   background-size: cover;
   background-position: center;
-
   background-image: ${({ theme }) =>
     theme === "light"
       ? `url(${lightBackground})`  // Using lightBackground
       : `url(${darkBackground})`}; // Using darkBackground
-
+  background-blend-mode: multiply; // Blend mode for dark theme
+  filter: ${({ theme }) => theme === "light" ? 'brightness(0.85)' : 'none'}; // Reduced brightness for light theme
   @media (min-width: 768px) {
     min-height: 80vh; // Reduced height for medium and larger devices
-  }
-
-  &::before, &::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-  }
-
-  &::before {
-    background: linear-gradient(
-      135deg,
-      var(--primary),
-      ${({ theme }) => (theme === "light" ? "var(--bs-light)" : "var(--bs-dark)")}
-    );
-  }
-
-  &::after {
-    background: ${({ theme }) =>
-      theme === "light"
-        ? "rgba(255, 255, 255, 0.4)"
-        : "rgba(0, 0, 0, 0.4)"};
   }
 `;
 
@@ -61,7 +47,10 @@ const ImageWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
+  padding: 0rem;
+  border-radius: 5%; // Rounded corners for images
+  box-shadow: 0px 0px 15px var(--electric-blue);
+  transform: ${({ theme }) => theme === "light" ? "translateY(-10px)" : "none"}; // Adding depth for light mode
 
   @media (min-width: 768px) {
     width: 60%; // Increased width on medium and larger devices
@@ -75,32 +64,64 @@ const ImageWrapper = styled.div`
   }
 `;
 
+const GlassDiv = styled.div`
+  background: ${({ theme }) => theme === "light" ? "rgba(255, 255, 255, 0.75)" : "rgba(20, 20, 20, 0.75)"};
+  backdrop-filter: blur(16px);
+  padding: 2rem;
+  border-radius: 20px;
+  transform:translateY(-10px)
+  border: 2px solid ${({ theme }) => theme === "light" ? "rgba(255, 255, 255, 0.3)" : "rgba(30, 144, 255, 0.3)"};
+  box-shadow: 0px 0px 15px var(--electric-blue); // Glow effect
+  color: var(--electric-blue); // Text color
+  margin-bottom: 2rem;
+`;
+
+const Title = styled.h1`
+  color: var(--electric-blue);
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+`;
+
+const Subheading = styled.h2`
+  color: var(--electric-blue);
+  font-weight: 500;
+  margin-bottom: 1rem;
+`;
+
+
+
 export default function Hero() {
   const { name } = useSelector(selectData);
-  const { theme } = useAppContext(); // Use the theme from context
+  const { theme } = useAppContext();
 
   return (
-    <StyledHero theme={theme}>  {/* Ensure theme is passed to StyledHero */}
-      <Container>
-        <Row className="align-items-center justify-content-center text-center">
-          <Col xs={12} md={6}>
-            <h1 className="mb-3 display-3 title">{name}</h1>
-            <SocialLinks />
-          </Col>
-          <Col xs={12} md={6} className="d-flex justify-content-center">
-            <ImageWrapper theme={theme}>  {/* Ensure theme is passed to ImageWrapper */}
-              <img src={theme === "light" ? lightfrontimage : darkfrontimage} alt="Front" />
-            </ImageWrapper>
-          </Col>
-        </Row>
-        <Row className="align-items-end down-container">
-          <Col className="m-4 text-center">
-            <Link to="About" className="link-icons">
-              <Icon icon="fa6-solid:circle-chevron-down" />
-            </Link>
-          </Col>
-        </Row>
-      </Container>
-    </StyledHero>
+    <>
+      <GlobalStyle />
+      <StyledHero theme={theme}>
+        <Container fluid>
+          <Row className="align-items-center justify-content-center text-center">
+            <Col xs={12} md={7} lg={6} className="d-flex align-items-center  justify-content-end">
+              <GlassDiv theme={theme} >
+                <Title>{name}</Title>
+                <Subheading>Junior Full Stack Developer</Subheading>
+                <SocialLinks />
+              </GlassDiv>
+            </Col>
+            <Col xs={12} md={5} lg={6} className="d-flex justify-content-center pb-4">
+              <ImageWrapper>
+                <img src={theme === "light" ? lightfrontimage : darkfrontimage} alt={`${name}`} />
+              </ImageWrapper>
+            </Col>
+          </Row>
+          <Row className="align-items-center justify-content-center">
+            <Col className="text-center">
+              <Link to="About" className="scroll-down">
+                <Icon icon="fa6-solid:circle-chevron-down" />
+              </Link>
+            </Col>
+          </Row>
+        </Container>
+      </StyledHero>
+    </>
   );
 }
