@@ -36,7 +36,8 @@ export const Loading = styled.div`
 export const Title = styled.div`
   display: inline-block;
   margin: 0 auto;
-  font-family: "Permanent Marker";
+  font-size: 2.5rem;
+  color: ${({ theme }) => theme === "light" ? "#000" : "#fff"};
   text-align: center;
 
   .underline {
@@ -61,7 +62,7 @@ const StyledDiv = styled.div`
   visibility: hidden;
 
   .link-icons {
-    color: ${({ theme }) => (theme.name === "light" ? "#45413C" : "#F5F2E8")};
+    color: var(--electric-blue);
   }
 
   &.show-up {

@@ -23,13 +23,13 @@ const StyledAboutMe = styled.section`
   color: ${({ theme }) => theme === "light" ? "#282c34" : "#fff"};
   padding: 4rem 0;
   text-align: center;
-  border:0px solid #61DBFB;
-
+  border-top:1px solid #61DBFB;
+  border-bottom:1px solid #61DBFB;
   .about-title {
-    margin-bottom: 2rem;
-    animation: ${fadeInUp} 1s ease-out forwards;
-    font-size: 2.5rem;
-    color: ${({ theme }) => theme === "light" ? "#000" : "#fff"};
+    color: ${({ theme }) => theme === "light" ? "rgba(0, 0, 0, 0.6)" : "rgba(255, 255, 255, 0.6)"};
+    font-weight: 900;
+    margin-bottom: 0.5rem;
+    text-align: center;
   }
 
   .icon {
@@ -72,7 +72,7 @@ export default function AboutMe() {
   return (
     <StyledAboutMe theme={theme}>
       <Container>
-        <div className="about-title">About Me</div>
+        <h2 className="about-title text-center pb-5">About Me</h2>
         <Row className="justify-content-center">
           <Col md={4} className="d-flex align-items-stretch">
             <div className="about-card">

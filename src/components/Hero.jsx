@@ -116,9 +116,9 @@ export default function Hero() {
           </Row>
           <Row className="align-items-center justify-content-center">
             <Col className="text-center ">
-              <Link to="About" className="scroll-down">
-                <Icon icon="fa6-solid:circle-chevron-down" className="fs-1" />
-              </Link>
+            <Link to="About" className="scroll-down" style={{ color: "var(--electric-blue)" }}>
+  <Icon icon="fa6-solid:circle-chevron-down" className="fs-1" />
+</Link>
             </Col>
           </Row>
         </Container>
