@@ -9,17 +9,14 @@ import Logo from "./images/logo.svg";
 import logoLight from "./images/logoLight.svg";
 import logoDark from "./images/logoDark.svg";
 // Hero Images (add your images to the /images directory with the same names)
-import DarkPhone from "./images/darkherosm.png";
-import DarkiPad from "./images/darkheromd.png";
-import DarkLaptop from "./images/darkherolg.png";
-import LightPhone from "./images/lightherosm.png";
-import LightiPad from "./images/lightheromd.png";
-import LightLaptop from "./images/lightherolg.png";
+import darkBackground from "./images/backgroundDarki.jpg";
+import lightBackground from "./images/backgroundLighti.jpg"
+import lightfrontimage from "./images/lightfrontimagei.jpg"
+import darkfrontimage from "./images/blackfrontimage.jpg"
 // Import your images for the flip card
-import FrontImage from "./images/frontImage.jpg"; // Replace with path to your front image
-import BackImage from "./images/backImage.jpg"; // Replace with path to your back image
+
 // If you change the import names above then you need to change the export names below
-export { DarkPhone, DarkiPad, DarkLaptop, LightPhone, LightiPad, LightLaptop , FrontImage, BackImage};
+export {darkBackground,lightBackground,lightfrontimage,darkfrontimage};
 
 /* START HERE
  **************************************************************
