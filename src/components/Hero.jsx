@@ -70,7 +70,8 @@ const GlassDiv = styled.div`
   padding: 2rem;
   border-radius: 20px;
   transform:translateY(-10px)
-  border: 2px solid ${({ theme }) => theme === "light" ? "rgba(255, 255, 255, 0.3)" : "rgba(30, 144, 255, 0.3)"};
+  border: 2px solid ${({ theme }) => theme === "light" ? "rgba(255, 255, 255, 0.3)" : "rgba(0, 0, 0, 0.3)"};
+  box-shadow: 0px 0px 20px ${({ theme }) => theme === "light" ? "#fff" : "#000"}; // Adding glow
   box-shadow: 0px 0px 15px var(--electric-blue); // Glow effect
   color: var(--electric-blue); // Text color
   margin-bottom: 2rem;
@@ -100,7 +101,7 @@ export default function Hero() {
       <StyledHero theme={theme}>
         <Container fluid>
           <Row className="align-items-center justify-content-center text-center">
-            <Col xs={12} md={7} lg={6} className="d-flex align-items-center  justify-content-end">
+            <Col xs={12} md={7} lg={6} className="d-flex align-items-center  justify-content-center">
               <GlassDiv theme={theme} >
                 <Title>{name}</Title>
                 <Subheading>Junior Full Stack Developer</Subheading>
