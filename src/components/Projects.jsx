@@ -7,11 +7,7 @@ import {
   selectIsLoading,
 } from "../pages/allProjectsSlice";
 import { Element } from "react-scroll";
-// Data
-import { filteredProjects, githubUsername } from "../data";
-// Icons
-import { Icon } from "@iconify/react";
-// Components
+import { githubUsername } from "../data";
 import { Col, Container, Row } from "react-bootstrap";
 import { Title, Loading } from "./globalStyledComponents";
 import StyledCard from "./StyledCard";
@@ -46,13 +42,25 @@ export default function Projects() {
             return { ...repo, latestCommitDate: null };
           }
           const commits = await commitsResponse.json();
-          return { ...repo, latestCommitDate: new Date(commits[0].commit.committer.date) };
+          const latestCommitDate = new Date(commits[0].commit.committer.date);
+
+          // Fetch README for the image
+          const readmeResponse = await fetch(`https://api.github.com/repos/${repo.full_name}/readme`, { headers });
+          if (!readmeResponse.ok) {
+            console.error(`Error fetching README for repo: ${repo.name}`);
+            return { ...repo, imageUrl: null, latestCommitDate };
+          }
+          const readmeData = await readmeResponse.json();
+          const readmeContent = atob(readmeData.content);
+          const imageUrlMatch = readmeContent.match(/\!\[.*?\]\((.*?)\)/);
+          const imageUrl = imageUrlMatch ? imageUrlMatch[1] : null;
+
+          return { ...repo, imageUrl, latestCommitDate };
         }));
 
         // Sort by latest commit date
         reposWithCommits.sort((a, b) => b.latestCommitDate - a.latestCommitDate);
 
-        // Store all projects and initially display the first 6 projects
         setAllProjects(reposWithCommits);
         setDisplayedProjects(reposWithCommits.slice(0, 6));
       } catch (error) {
@@ -64,9 +72,8 @@ export default function Projects() {
   }, []);
 
   const handleExpandClick = () => {
-    // Expand to show the top 12 projects
-    setIsExpanded(true);
-    setDisplayedProjects(allProjects.slice(0, 12));
+    setIsExpanded(!isExpanded);
+    setDisplayedProjects(allProjects.slice(0, isExpanded ? 6 : 12));
   };
 
   return (
@@ -74,7 +81,7 @@ export default function Projects() {
       <section className="section">
         <Container>
           <Title>
-            <h2>Skills</h2>
+            <h2>Projects</h2>
             <div className="underline"></div>
           </Title>
           {isLoading && <Loading />}
@@ -85,10 +92,10 @@ export default function Projects() {
             </h2>
           )}
           <Row xs={1} md={2} lg={3} className="g-4 justify-content-center">
-            {displayedProjects.map(({ id, image, name, description, html_url, homepage }) => (
+            {displayedProjects.map(({ id, imageUrl, name, description, html_url, homepage }) => (
               <Col key={id}>
                 <StyledCard
-                  image={image}
+                  image={imageUrl}
                   name={name}
                   description={description}
                   url={html_url}
