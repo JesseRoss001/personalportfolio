@@ -18,7 +18,7 @@ export default function Contact() {
         <Container className="d-flex">
           <Title>
             <h2>Contact Me</h2>
-            <div className="underline"></div>
+            
           </Title>
         </Container>
         <Container>

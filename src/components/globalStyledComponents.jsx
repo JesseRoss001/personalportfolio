@@ -1,8 +1,10 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 import { Link } from "react-scroll/modules";
+// Icons
 import { Icon } from "@iconify/react";
 
+// Animations
 export const Spin = keyframes`
   from {
     transform: rotate(0deg);
@@ -18,6 +20,7 @@ const spinner = keyframes`
     }
 `;
 
+// Loading Spinner
 export const Loading = styled.div`
   display: inline-block;
   width: 5rem;
@@ -29,6 +32,7 @@ export const Loading = styled.div`
   animation: ${spinner} 0.6s linear infinite;
 `;
 
+// Titles
 export const Title = styled.div`
   display: inline-block;
   margin: 0 auto;
@@ -45,11 +49,12 @@ export const Title = styled.div`
     margin: 0 auto 1.5rem auto;
     background: ${({ theme }) =>
       theme.name === "light"
-        ? "linear-gradient(to left, #ffdcf1, #316e7e)"
-        : "linear-gradient(to right, #316e7e, #ffdcf1)"};
+        ? "linear-gradient(to left, var(--primary-light), var(--primary-dark))"
+        : "linear-gradient(to right, var(--primary-dark), var(--primary-light))"};
   }
 `;
 
+// Back to top link
 const StyledDiv = styled.div`
   position: fixed;
   bottom: calc(var(--min-footer-height) + 1.5rem);

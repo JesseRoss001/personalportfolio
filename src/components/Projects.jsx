@@ -35,12 +35,7 @@ const TitleContainer = styled(Title)`
   // Add your title styles here
 `;
 
-const Underline = styled.div`
-  width: 70px;
-  height: 5px;
-  background: var(--primary);
-  margin: auto;
-`;
+
 
 const ExpandButton = styled.button`
   background: ${({ theme }) => (theme === 'light' ? '#fff' : '#333')};
@@ -127,7 +122,7 @@ export default function Projects() {
         <ProjectsContainer>
           <TitleContainer>
             <h2>Projects</h2>
-            <Underline />
+           
           </TitleContainer>
           {isLoading && <Loading />}
           {error && <h2 className="text-center">{error}</h2>}
