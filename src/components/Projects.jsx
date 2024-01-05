@@ -12,6 +12,51 @@ import { Col, Container, Row } from "react-bootstrap";
 import { Title, Loading } from "./globalStyledComponents";
 import StyledCard from "./StyledCard";
 
+import styled from 'styled-components';
+
+// Styled components
+const ProjectsContainer = styled(Container)`
+  // Add your container styles here
+`;
+
+const ProjectRow = styled(Row)`
+  // Add your row styles here
+`;
+
+const ProjectCol = styled(Col)`
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+`;
+
+const TitleContainer = styled(Title)`
+  // Add your title styles here
+`;
+
+const Underline = styled.div`
+  width: 70px;
+  height: 5px;
+  background: var(--primary);
+  margin: auto;
+`;
+
+const ExpandButton = styled.button`
+  background: ${({ theme }) => (theme === 'light' ? '#fff' : '#333')};
+  color: ${({ theme }) => (theme === 'light' ? '#333' : '#fff')};
+  border: none;
+  padding: 10px 20px;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background: ${({ theme }) => (theme === 'light' ? '#ddd' : '#555')};
+  }
+`;
+
+
 export default function Projects() {
   const [displayedProjects, setDisplayedProjects] = useState([]);
   const [allProjects, setAllProjects] = useState([]);
@@ -79,11 +124,11 @@ export default function Projects() {
   return (
     <Element name={"Projects"} id="projects">
       <section className="section">
-        <Container>
-          <Title>
+        <ProjectsContainer>
+          <TitleContainer>
             <h2>Projects</h2>
-            <div className="underline"></div>
-          </Title>
+            <Underline />
+          </TitleContainer>
           {isLoading && <Loading />}
           {error && <h2 className="text-center">{error}</h2>}
           {!error && data.length === 0 && (
@@ -91,9 +136,9 @@ export default function Projects() {
               Oops, you do not have any GitHub projects yet...
             </h2>
           )}
-          <Row xs={1} md={2} lg={3} className="g-4 justify-content-center">
+          <ProjectRow xs={1} md={2} lg={3} className="g-4 justify-content-center">
             {displayedProjects.map(({ id, imageUrl, name, description, html_url, homepage }) => (
-              <Col key={id}>
+              <ProjectCol key={id}>
                 <StyledCard
                   image={imageUrl}
                   name={name}
@@ -101,17 +146,17 @@ export default function Projects() {
                   url={html_url}
                   demo={homepage}
                 />
-              </Col>
+              </ProjectCol>
             ))}
-          </Row>
+          </ProjectRow>
           {!isExpanded && allProjects.length > 6 && (
             <div className="text-center mt-5">
-              <button onClick={handleExpandClick} className={`btn ${theme === "light" ? "btn-outline-dark" : "btn-outline-light"}`}>
+              <ExpandButton onClick={handleExpandClick} theme={theme}>
                 Show More
-              </button>
+              </ExpandButton>
             </div>
           )}
-        </Container>
+        </ProjectsContainer>
       </section>
     </Element>
   );

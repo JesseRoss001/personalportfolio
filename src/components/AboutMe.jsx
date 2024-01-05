@@ -1,6 +1,4 @@
 import React from 'react';
-import { useSelector } from "react-redux";
-import { selectData } from "../pages/homeSlice";
 import { useAppContext } from "../appContext";
 import { Col, Container, Row } from 'react-bootstrap';
 import styled, { keyframes } from 'styled-components';
@@ -19,39 +17,45 @@ const fadeInUp = keyframes`
 `;
 
 const StyledAboutMe = styled.section`
-  background-color: ${({ theme }) => theme === "light" ? "#E1D9D1" : "rgb(33, 37, 41)"};
+  background: ${({ theme }) => theme === "light" 
+    ? "linear-gradient(135deg, #E1D9D1 0%, #F7F7F7 100%)" 
+    : "linear-gradient(135deg, #20232a 0%, #333842 100%)"};
   color: ${({ theme }) => theme === "light" ? "#282c34" : "#fff"};
   padding: 4rem 0;
   text-align: center;
-  border-top:1px solid #61DBFB;
-  border-bottom:1px solid #61DBFB;
+  border-top: 1px solid #61DBFB;
+  border-bottom: 1px solid #61DBFB;
+  animation: ${fadeInUp} 1s ease-out;
+
   .about-title {
-    color: ${({ theme }) => theme === "light" ? "rgba(0, 0, 0, 0.6)" : "rgba(255, 255, 255, 0.6)"};
+    color: ${({ theme }) => theme === "light" ? "#000" : "#fff"};
     font-weight: 900;
     margin-bottom: 0.5rem;
     text-align: center;
+    font-size: 2.5rem;
   }
 
   .icon {
-    color: #61DBFB; // Light blue icons
+    color: #61DBFB;
     margin-bottom: 1rem;
   }
 
   h3 {
-    color: ${({ theme }) => theme === "light" ? "#000" : "#fff"}; // Light blue headings
+    color: ${({ theme }) => theme === "light" ? "#000" : "#fff"};
+    font-weight: 700;
+    margin-bottom: 1rem;
   }
 
   .about-card {
-    background: ${({ theme }) => theme === "light" ? "rgba(255, 255, 255, 0.85)" : "#333"};
+    background: ${({ theme }) => theme === "light" ? "rgba(255, 255, 255, 0.9)" : "rgba(50, 50, 50, 0.9)"};
     padding: 2rem;
     margin-bottom: 2rem;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    backdrop-filter: ${({ theme }) => theme === "light" ? "blur(10px)" : "none"};
-    border: ${({ theme }) => theme === "light" ? "1px solid rgba(255, 255, 255, 0.18)" : "none"};
+    backdrop-filter: blur(10px);
+    border: ${({ theme }) => theme === "light" ? "1px solid rgba(255, 255, 255, 0.18)" : "1px solid rgba(0, 0, 0, 0.3)"};
     transition: transform 0.3s ease;
-    min-height: 250px; // Ensure consistent card height
-    box-shadow: 0px 0px 20px ${({ theme }) => theme === "light" ? "#61DBFB" : "#000"}; 
+    min-height: 250px;
 
     &:hover {
       transform: translateY(-5px);
@@ -61,7 +65,7 @@ const StyledAboutMe = styled.section`
   
   @media (max-width: 768px) {
     .about-card {
-      min-height: auto; // Allow cards to adjust height on smaller screens
+      min-height: auto;
     }
   }
 `;
@@ -72,7 +76,7 @@ export default function AboutMe() {
   return (
     <StyledAboutMe theme={theme}>
       <Container>
-        <h2 className="about-title text-center pb-5">About Me</h2>
+        <h2 className="about-title">About Me</h2>
         <Row className="justify-content-center">
           <Col md={4} className="d-flex align-items-stretch">
             <div className="about-card">
@@ -105,5 +109,4 @@ export default function AboutMe() {
       </Container>
     </StyledAboutMe>
   );
-
 }

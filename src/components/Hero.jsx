@@ -2,23 +2,32 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { selectData } from "../pages/homeSlice";
 import { Link } from "react-scroll";
-import styled, { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle, keyframes } from "styled-components";
 import { useAppContext } from "../appContext";
 import { Icon } from "@iconify/react";
 import { Col, Container, Row } from "react-bootstrap";
 import SocialLinks from "./SocialLinks";
 import { darkBackground, lightBackground, lightfrontimage, darkfrontimage } from "../data";
 
-// Global style to import Montserrat font and define electric light blue color
+const glowAnimation = keyframes`
+  0%, 100% {
+    box-shadow: 0 0 10px var(--electric-blue), 0 0 20px var(--electric-blue);
+  }
+  50% {
+    box-shadow: 0 0 15px var(--electric-blue), 0 0 30px var(--electric-blue);
+  }
+`;
+
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;700;900&display=swap');
 
   body {
     font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
   }
 
   :root {
-    --electric-blue: #61DBFB; // Define electric blue color
+    --electric-blue: #61DBFB;
   }
 `;
 
@@ -28,39 +37,35 @@ const StyledHero = styled.header`
   place-items: center;
   max-width: 100%;
   margin: 0 auto;
-  min-height: 100vh; // Adjusted for full viewport height
+  min-height: 100vh;
   background-size: cover;
   background-position: center;
-  background-image: ${({ theme }) =>
-    theme === "light"
-      ? `url(${lightBackground})`  // Using lightBackground
-      : `url(${darkBackground})`}; // Using darkBackground
-  background-blend-mode: multiply; // Blend mode for dark theme
-  filter: ${({ theme }) => theme === "light" ? 'brightness(0.85)' : 'none'}; // Reduced brightness for light theme
+  background-image: ${({ theme }) => theme === "light" ? `url(${lightBackground})` : `url(${darkBackground})`};
+  background-blend-mode: multiply;
+  filter: ${({ theme }) => theme === "light" ? 'brightness(0.85)' : 'none'};
+  
   @media (min-width: 768px) {
-    min-height: 80vh; // Reduced height for medium and larger devices
+    min-height: 80vh;
   }
 `;
 
 const ImageWrapper = styled.div`
-  width: 100%; // Full width on small screens
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0rem;
-  border-radius: 5%; // Rounded corners for images
-  box-shadow: 0px 0px 15px var(--electric-blue);
-  transform: ${({ theme }) => theme === "light" ? "translateY(-10px)" : "none"}; // Adding depth for light mode
+  border-radius: 5%;
+  animation: ${glowAnimation} 2s ease-in-out infinite;
 
   @media (min-width: 768px) {
-    width: 60%; // Increased width on medium and larger devices
+    width: 60%;
   }
 
   img {
     width: 100%;
-    height: auto; // Maintain aspect ratio
+    height: auto;
     border-radius: 10px;
-    box-shadow: 0px 0px 20px ${({ theme }) => theme === "light" ? "#fff" : "#000"}; // Adding glow
   }
 `;
 
@@ -69,16 +74,14 @@ const GlassDiv = styled.div`
   backdrop-filter: blur(16px);
   padding: 2rem;
   border-radius: 20px;
-  transform:translateY(-10px)
+  transform: translateY(-10px);
   border: 2px solid ${({ theme }) => theme === "light" ? "rgba(255, 255, 255, 0.3)" : "rgba(0, 0, 0, 0.3)"};
-  box-shadow: 0px 0px 20px ${({ theme }) => theme === "light" ? "#fff" : "#000"}; // Adding glow
-  box-shadow: 0px 0px 15px var(--electric-blue); // Glow effect
-  color: var(--electric-blue); // Text color
+  color: var(--electric-blue);
   margin-bottom: 2rem;
 `;
 
 const Title = styled.h1`
-color: ${({ theme }) => theme === "light" ? "rgba(255, 255, 255, 0.6)" : "rgba(0, 0, 0, 0.6)"};
+color: var(--electric-blue);
   font-weight: 900;
   margin-bottom: 0.5rem;
 `;
@@ -88,8 +91,6 @@ const Subheading = styled.h2`
   font-weight: 500;
   margin-bottom: 1rem;
 `;
-
-
 
 export default function Hero() {
   const { name } = useSelector(selectData);
@@ -101,8 +102,8 @@ export default function Hero() {
       <StyledHero theme={theme}>
         <Container fluid>
           <Row className="align-items-center justify-content-center text-center">
-            <Col xs={12} md={7} lg={6} className="d-flex align-items-center  justify-content-center">
-              <GlassDiv theme={theme} >
+            <Col xs={12} md={7} lg={6} className="d-flex align-items-center justify-content-center">
+              <GlassDiv theme={theme}>
                 <Title>{name}</Title>
                 <Subheading>Junior Full Stack Developer</Subheading>
                 <SocialLinks />
@@ -115,10 +116,10 @@ export default function Hero() {
             </Col>
           </Row>
           <Row className="align-items-center justify-content-center">
-            <Col className="text-center ">
-            <Link to="About" className="scroll-down" style={{ color: "var(--electric-blue)" }}>
-  <Icon icon="fa6-solid:circle-chevron-down" className="fs-1" />
-</Link>
+            <Col className="text-center">
+              <Link to="About" className="scroll-down" style={{ color: "var(--electric-blue)" }}>
+                <Icon icon="fa6-solid:circle-chevron-down" className="fs-1" />
+              </Link>
             </Col>
           </Row>
         </Container>
