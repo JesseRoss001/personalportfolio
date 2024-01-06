@@ -1,9 +1,34 @@
 import React from "react";
 import { useAppContext } from "../appContext";
-// Data
 import { formspreeUrl } from "../data";
-// Components
 import { Alert, Button, Form, Spinner } from "react-bootstrap";
+import styled from 'styled-components';
+
+const StyledForm = styled(Form)`
+  color: ${({ theme }) => theme === "light" ? "#282c34" : "#fff"};
+
+  .form-label, .form-control, .form-control::placeholder {
+    color: ${({ theme }) => theme === "light" ? "#282c34" : "#fff"};
+  }
+
+  .form-control {
+    background-color: ${({ theme }) => theme === "light" ? "#fff" : "#333"};
+    border: ${({ theme }) => theme === "light" ? "1px solid #ced4da" : "1px solid #495057"};
+  }
+
+  .btn-outline {
+    border-color: ${({ theme }) => theme === "light" ? "#282c34" : "#fff"};
+    color: ${({ theme }) => theme === "light" ? "#282c34" : "#fff"};
+    &:hover {
+      background-color: ${({ theme }) => theme === "light" ? "#282c34" : "#fff"};
+      color: ${({ theme }) => theme === "light" ? "#fff" : "#282c34"};
+    }
+  }
+
+  .feedback-message {
+    color: ${({ theme }) => theme === "light" ? "#495057" : "#dee2e6"};
+  }
+`;
 
 export default function ContactForm() {
   const [isValidated, setIsValidated] = React.useState(false);
@@ -68,14 +93,15 @@ export default function ContactForm() {
 
   return (
     <>
-      <Form noValidate validated={isValidated} onSubmit={handleSubmit}>
+      <StyledForm noValidate validated={isValidated} onSubmit={handleSubmit} theme={theme}>
         <Form.Group className="mx-auto mb-3 form-group" controlId="name">
           <Form.Label>Name</Form.Label>
           <Form.Control required type="text" placeholder="Your name" />
-          <Form.Control.Feedback type="invalid">
+          <Form.Control.Feedback type="invalid" className="feedback-message">
             <h5>Name must be at least one character.</h5>
           </Form.Control.Feedback>
         </Form.Group>
+
         <Form.Group className="mx-auto mb-3 form-group" controlId="email">
           <Form.Label>Email address</Form.Label>
           <Form.Control
@@ -83,17 +109,19 @@ export default function ContactForm() {
             pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
             placeholder="someone@something.com"
           />
-          <Form.Control.Feedback type="invalid">
+          <Form.Control.Feedback type="invalid" className="feedback-message">
             <h5>Please enter a valid email.</h5>
           </Form.Control.Feedback>
         </Form.Group>
+
         <Form.Group className="mx-auto mb-3 form-group" controlId="message">
           <Form.Label>Message</Form.Label>
           <Form.Control required as="textarea" placeholder="Your message..." />
-          <Form.Control.Feedback type="invalid">
+          <Form.Control.Feedback type="invalid" className="feedback-message">
             <h5>Please provide a valid message.</h5>
           </Form.Control.Feedback>
         </Form.Group>
+
         <Form.Group className="mx-auto text-center form-group">
           {formspreeUrl && (
             <Button
@@ -105,7 +133,7 @@ export default function ContactForm() {
             >
               Submit{" "}
               {isProcessing && (
-                <Spinner animation="border" variant="success" size="sm" />
+                <Spinner animation="border" variant={theme === "light" ? "dark" : "light"} size="sm" />
               )}
             </Button>
           )}
@@ -118,6 +146,7 @@ export default function ContactForm() {
           >
             <Alert.Heading>Success! I will contact you soon.</Alert.Heading>
           </Alert>
+
           <Alert
             show={danger}
             variant="danger"
@@ -126,13 +155,14 @@ export default function ContactForm() {
           >
             <Alert.Heading>{dangerMessage}</Alert.Heading>
           </Alert>
+
           <Alert show={!formspreeUrl} variant="danger">
             <Alert.Heading>
               You must provide a valid formspree url in data.js
             </Alert.Heading>
           </Alert>
         </Form.Group>
-      </Form>
+      </StyledForm>
     </>
   );
 }

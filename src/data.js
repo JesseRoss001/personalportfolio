@@ -13,11 +13,11 @@ import darkBackground from "./images/backgroundDarki.jpg";
 import lightBackground from "./images/backgroundLighti.jpg"
 import lightfrontimage from "./images/lightfrontimagei.jpg"
 import darkfrontimage from "./images/blackfrontimage.jpg"
-import laptop from"./images/laptopman.png"
+import contactimage from"./images/contactimage.png"
 // Import your images for the flip card
 
 // If you change the import names above then you need to change the export names below
-export {darkBackground,lightBackground,lightfrontimage,darkfrontimage,laptop};
+export {darkBackground,lightBackground,lightfrontimage,darkfrontimage,contactimage};
 
 /* START HERE
  **************************************************************
@@ -291,4 +291,4 @@ export const projectCardImages = [
   Add your formspree endpoint below.
   https://formspree.io/
 */
-export const formspreeUrl = "https://formspree.io/f/YourEndpoint";
+export const formspreeUrl = "https://formspree.io/f/xdoqobzr";
