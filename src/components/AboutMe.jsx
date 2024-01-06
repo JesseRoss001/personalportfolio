@@ -33,7 +33,6 @@ const StyledAboutMe = styled.section`
     margin-bottom: 2rem;
     text-align: center;
     font-size: 2.5rem;
-    padding-bottom:1rem;
   }
 
   .icon {

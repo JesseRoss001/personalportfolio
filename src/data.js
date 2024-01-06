@@ -13,10 +13,11 @@ import darkBackground from "./images/backgroundDarki.jpg";
 import lightBackground from "./images/backgroundLighti.jpg"
 import lightfrontimage from "./images/lightfrontimagei.jpg"
 import darkfrontimage from "./images/blackfrontimage.jpg"
+import laptop from"./images/laptopman.png"
 // Import your images for the flip card
 
 // If you change the import names above then you need to change the export names below
-export {darkBackground,lightBackground,lightfrontimage,darkfrontimage};
+export {darkBackground,lightBackground,lightfrontimage,darkfrontimage,laptop};
 
 /* START HERE
  **************************************************************

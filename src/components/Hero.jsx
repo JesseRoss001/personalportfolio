@@ -8,7 +8,7 @@ import { useSpring, animated } from 'react-spring';
 import { Icon } from "@iconify/react";
 import { Col, Container, Row } from "react-bootstrap";
 import SocialLinks from "./SocialLinks";
-import { darkBackground, lightBackground, lightfrontimage, darkfrontimage } from "../data";
+import { darkBackground, lightBackground, lightfrontimage, darkfrontimage,laptop } from "../data";
 
 const glowAnimation = keyframes`
   0%, 100% {
