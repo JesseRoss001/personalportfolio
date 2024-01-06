@@ -100,6 +100,8 @@ export default function NavBar() {
         bg={theme === "light" ? "light" : "dark"}
         variant={theme === "light" ? "light" : "dark"}
         fixed="top"
+        width="100%"
+        overflow="hidden"
       >
         <Container>
         <Navbar.Brand>

@@ -17,7 +17,7 @@ import { Loading } from "./components/globalStyledComponents";
 import ScrollToTop from "./components/ScrollToTop";
 import GlobalStyles from "./components/GlobalStyles";
 import NavBar from "./components/NavBar";
-
+import './animations.css';
 // Pages
 import Home from "./pages/Home";
 import AllProjects from "./pages/AllProjects";

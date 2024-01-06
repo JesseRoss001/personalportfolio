@@ -11,17 +11,24 @@ import { githubUsername } from "../data";
 import { Col, Container, Row } from "react-bootstrap";
 import {  Loading } from "./globalStyledComponents";
 import StyledCard from "./StyledCard";
+import styled, { keyframes } from 'styled-components';
 
-import styled from 'styled-components';
 
 // Styled components
 const ProjectsContainer = styled(Container)`
-  // Add your container styles here
+
 `;
 
 const ProjectRow = styled(Row)`
-  // Add your row styles here
+
+border-top: 5px solid #ace5ee; /* Light electric blue color */
+
+
+
+box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2),
+  0 4px 5px rgba(0, 0, 0, 0.15);
 `;
+
 
 const ProjectCol = styled(Col)`
   transition: transform 0.3s ease;
@@ -132,7 +139,7 @@ export default function Projects() {
               Oops, you do not have any GitHub projects yet...
             </h2>
           )}
-          <ProjectRow xs={1} md={2} lg={3} className="g-4 justify-content-center">
+          <ProjectRow xs={1} md={2} lg={3} className="g-4 m-4 justify-content-center">
             {displayedProjects.map(({ id, imageUrl, name, description, html_url, homepage }) => (
               <ProjectCol key={id}>
                 <StyledCard

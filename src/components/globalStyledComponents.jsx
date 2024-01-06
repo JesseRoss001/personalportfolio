@@ -3,7 +3,11 @@ import styled, { keyframes } from "styled-components";
 import { Link } from "react-scroll/modules";
 // Icons
 import { Icon } from "@iconify/react";
-
+export const moveGradient = keyframes`
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+`;
 // Animations
 export const Spin = keyframes`
   from {

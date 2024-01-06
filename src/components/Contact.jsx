@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
-import { Element } from "react-scroll";
-import styled, { keyframes, ThemeContext } from "styled-components";
-import { Container, Row, Col } from "react-bootstrap";
-import ContactForm from "./ContactForm";
-import { contactimage } from "../data";
+import React from 'react';
+import { Element } from 'react-scroll';
+import styled, { keyframes } from 'styled-components';
+import { Container, Row, Col } from 'react-bootstrap';
+import ContactForm from './ContactForm';
+import { contactimage } from '../data';
+import { useAppContext } from '../appContext';
 
 const fadeIn = keyframes`
   from { opacity: 0; }
@@ -11,52 +12,61 @@ const fadeIn = keyframes`
 `;
 
 const StyledSection = styled.section`
-  padding-top: 80px; // Adjusted for a better view
-  padding-bottom: 50px; // Add more space at the bottom
+  padding-top: 80px;
+  padding-bottom: 50px;
   position: relative;
-  background: ${({ theme }) => theme === "light"
-    ? "linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)"
-    : "linear-gradient(120deg, #0f2027 0%, #203a43 50%, #2c5364 100%)"};
-  transition: background-color 0.3s ease;
+
+  /* Transition and animation properties (as previously included) */
+  /* ... */
+
+  background: ${({ theme }) =>
+    theme === 'light'
+      ? 'linear-gradient(120deg, #e0eafc 0%, #7DF9FF 100%)'
+      : 'linear-gradient(120deg, #28242c 10%, #7DF9FF 100%)'
+  };
+
+  /* 3D borders */
+  border-top: 5px solid #ace5ee; /* Light electric blue color */
+  border-bottom: 5px solid #ace5ee;
+
+  /* Create the 3D effect */
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2),
+    0 4px 5px rgba(0, 0, 0, 0.15);
 `;
 
 const AwesomeDiv = styled.div`
-  background: ${({ theme }) => theme === "light" ? "#ffffff" : "#282c34"};
+  background: ${({ theme }) => theme === 'light' ? '#ffffff' : '#282c34'};
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px ${({ theme }) => theme === "light" ? "rgba(0, 0, 0, 0.1)" : "rgba(255, 255, 255, 0.1)"};
+  box-shadow: ${({ theme }) => theme === 'light' ? '0 20px 25px rgba(0, 0, 0, 0.1)' : '0 20px 25px rgba(255, 255, 255, 0.05)'};
   animation: ${fadeIn} 1s ease;
-  margin-bottom: 50px; // Ensure spacing from the last section
-`;
+  margin-bottom: 50px;
+  transition: transform 0.3s ease;
 
-const ImageWrapper = styled.div`
-  background-image: url(${contactimage});
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  height: auto; // Adjust height automatically
-  width: 100%;
-  max-width: 400px; // Keep original size
-  margin: auto; // Center the image in its column
+  &:hover {
+    transform: translateY(-5px); /* subtle 3D hover effect */
+    box-shadow: ${({ theme }) => theme === 'light' ? '0 25px 30px rgba(0, 0, 0, 0.2)' : '0 25px 30px rgba(255, 255, 255, 0.1)'};
+  }
 `;
 
 export default function Contact() {
-  const theme = useContext(ThemeContext);
+  const { theme } = useAppContext();
 
   return (
-    <Element name={"Contact"} id="contact">
-      <StyledSection>
+    <Element name={'Contact'} id='contact'>
+      <StyledSection theme={theme}>
         <Container>
           <Row className="align-items-center justify-content-center">
+          <Col xs={12} sm={12} md={4} lg={6}>
+              <img src={contactimage} alt="Contact" style={{ maxWidth: '400px', width: '100%', height: 'auto', margin: 'auto' }} />
+            </Col>
             <Col xs={12} sm={12} md={8} lg={6}>
-              <AwesomeDiv>
+              <AwesomeDiv theme={theme}>
                 <h2>Contact Me</h2>
                 <ContactForm />
               </AwesomeDiv>
             </Col>
-            <Col xs={12} sm={12} md={4} lg={6}>
-              <ImageWrapper />
-            </Col>
+
           </Row>
         </Container>
       </StyledSection>

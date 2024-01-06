@@ -10,7 +10,8 @@ import { Card } from "react-bootstrap";
 const StyledCardComponent = styled.div`
   .card {
     color: ${({ theme }) => theme.color};
-    background: ${({ theme }) => theme.name === "light" ? "#fff" : "#2c3e50"};
+    background: ${({ theme }) => theme.name === "light"       ? 'linear-gradient(120deg, #e0eafc 0%, #7DF9FF 100%)'
+    : 'linear-gradient(120deg, #28242c 0%, #7DF9FF 100%)'};
     border: none;
     border-radius: 15px;
     overflow: hidden;
@@ -26,6 +27,7 @@ const StyledCardComponent = styled.div`
         theme.name === "light"
           ? "0 15px 30px rgba(0, 0, 0, 0.2)"
           : "0 15px 30px rgba(255, 255, 255, 0.15)"};
+    padding-bottom:20px;
     }
 
     .card-img-top {
@@ -35,6 +37,7 @@ const StyledCardComponent = styled.div`
 
     .card-body {
       padding: 20px;
+      
     }
 
     .card-title {

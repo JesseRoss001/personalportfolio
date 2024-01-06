@@ -26,7 +26,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   :root {
-    --electric-blue: #61DBFB;
+    var(--electric-blue);
   }
 `;
 
