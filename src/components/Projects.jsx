@@ -9,7 +9,7 @@ import {
 import { Element } from "react-scroll";
 import { githubUsername } from "../data";
 import { Col, Container, Row } from "react-bootstrap";
-import { Title, Loading } from "./globalStyledComponents";
+import {  Loading } from "./globalStyledComponents";
 import StyledCard from "./StyledCard";
 
 import styled from 'styled-components';
@@ -31,10 +31,14 @@ const ProjectCol = styled(Col)`
   }
 `;
 
-const TitleContainer = styled(Title)`
-  // Add your title styles here
+const Title = styled.h2`
+color: ${({ theme }) => theme === "light" ? "#000" : "#fff"};
+  font-weight: 900;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 2.5rem;
+  padding-bottom:1rem;
 `;
-
 
 
 const ExpandButton = styled.button`
@@ -120,10 +124,7 @@ export default function Projects() {
     <Element name={"Projects"} id="projects">
       <section className="section">
         <ProjectsContainer>
-          <TitleContainer>
-            <h2>Projects</h2>
-           
-          </TitleContainer>
+        <Title theme={theme}>Projects</Title>
           {isLoading && <Loading />}
           {error && <h2 className="text-center">{error}</h2>}
           {!error && data.length === 0 && (

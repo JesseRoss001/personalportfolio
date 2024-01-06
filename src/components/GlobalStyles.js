@@ -24,6 +24,21 @@ const GlobalStyles = createGlobalStyle`
   --card-height: 29rem;
 }
 
+@keyframes bubbleAnimation {
+  0% {
+    top: -100px;
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+
 body {
   background: ${({ theme }) => theme.background};
   color: ${({ theme }) => theme.color};

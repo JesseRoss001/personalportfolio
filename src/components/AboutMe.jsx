@@ -30,9 +30,10 @@ const StyledAboutMe = styled.section`
   .about-title {
     color: ${({ theme }) => theme === "light" ? "#000" : "#fff"};
     font-weight: 900;
-    margin-bottom: 0.5rem;
+    margin-bottom: 2rem;
     text-align: center;
     font-size: 2.5rem;
+    padding-bottom:1rem;
   }
 
   .icon {
