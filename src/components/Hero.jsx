@@ -1,4 +1,4 @@
-import React from "react";
+import React , {useEffect} from "react";
 import { useSelector } from "react-redux";
 import { selectData } from "../pages/homeSlice";
 import { Link } from "react-scroll";
@@ -83,8 +83,7 @@ const cycleLightColors = keyframes`
   100% { background-color: rgba(255, 250, 250, 0.75); }
 `;
 
-const GlassDiv = styled.div`
-  background: ${({ theme }) => theme === "light" ? "rgba(255, 255, 255, 0.75)" : "rgba(20, 20, 20, 0.75)"};
+const GlassDiv = styled(animated.div)`
   backdrop-filter: blur(16px);
   padding: 2rem;
   border-radius: 20px;
@@ -92,7 +91,6 @@ const GlassDiv = styled.div`
   color: var(--electric-blue);
   margin-bottom: 2rem;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-  animation: ${({ theme }) => theme === "light" ? cycleLightColors : cycleDarkColors} 5s infinite alternate;
   transition: transform 0.3s ease-out, box-shadow 0.3s ease-out, color 1s;
 
   &:hover {
@@ -103,13 +101,13 @@ const GlassDiv = styled.div`
 `;
 
 const Title = styled.h1`
-  color: var(--electric-blue);
+ 
   font-weight: 900;
   margin-bottom: 0.5rem;
 `;
 
 const Subheading = styled.h2`
-  color: var(--electric-blue);
+ 
   font-weight: 500;
   margin-bottom: 1rem;
 `;
@@ -126,13 +124,28 @@ const CursorOverlay = styled(animated.div)`
 export default function Hero() {
   const { name } = useSelector(selectData);
   const { theme } = useAppContext();
-
+  const [style, setStyle] = useSpring(() => ({
+    background: 'rgba(255, 255, 255, 0.75)',
+    color: 'var(--electric-blue)'
+  }));
   // react-spring hook for cursor position
   const [{ xy }, set] = useSpring(() => ({ xy: [0, 0], config: { mass: 5, tension: 120, friction: 120 } }));
 
   const mouseMove = (e) => {
     set({ xy: [e.clientX, e.clientY] });
   };
+  useEffect(() => {
+    setStyle.start({
+      background: theme === "light"
+        ? 'linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(30, 144, 255, 0.75) 100%)'
+        : 'rgba(20, 20, 20, 0.75)',
+      color: theme === "light" ? 'var(--electric-blue)' : '#000',
+       // Change text color based on theme
+      config: { duration: 2000 }
+    });
+  }, [theme, setStyle]);
+
+
   return (
     <>
       <GlobalStyle />
@@ -140,9 +153,9 @@ export default function Hero() {
         <Container fluid>
           <Row className="align-items-center justify-content-center text-center">
             <Col xs={12} md={7} lg={6} className="d-flex align-items-center justify-content-center">
-              <GlassDiv theme={theme}>
+            <GlassDiv theme={theme} style={style}>
                 <Title>{name}</Title>
-                <Subheading>Junior Full Stack Developer</Subheading>
+                <Subheading >Junior Full Stack Developer</Subheading>
                 <SocialLinks />
               </GlassDiv>
             </Col>
