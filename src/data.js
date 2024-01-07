@@ -15,7 +15,30 @@ import lightfrontimage from "./images/lightfrontimagei.jpg"
 import darkfrontimage from "./images/blackfrontimage.jpg"
 import contactimage from"./images/contactimage.png"
 // Import your images for the flip card
+// Import new images for the Interests section
+import energy1 from "./images/energy1.png";
+import energy2 from "./images/energy2.png";
+import ai from "./images/ai.png";
+import responddesign from "./images/responddesign.png";
+import coffee from "./images/coffee.png";
+import mathematics from "./images/mathematics.png";
+import poker1 from "./images/poker1.png";
+import poker2 from "./images/poker2.png";
 
+// ... other exports
+
+// Export your images for the Interests section
+export {
+  // ... other exports,
+  energy1,
+  energy2,
+  ai,
+  responddesign,
+  coffee,
+  mathematics,
+  poker1,
+  poker2
+};
 // If you change the import names above then you need to change the export names below
 export {darkBackground,lightBackground,lightfrontimage,darkfrontimage,contactimage};
 

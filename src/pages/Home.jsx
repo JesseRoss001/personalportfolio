@@ -7,6 +7,7 @@ import AboutMe from "../components/AboutMe";
 import Skills from "../components/Skills";
 import Projects from "../components/Projects";
 import Contact from "../components/Contact";
+import Interests from "../components/Interests"
 import { BackToTop } from "../components/globalStyledComponents";
 import Footer from "../components/Footer";
 
@@ -24,10 +25,13 @@ export default function Home() {
     <>
       <Hero />
       <main>
-        <AboutMe />
-        <Skills />
-        <Projects />
+      <Projects />
+        
         <Contact />
+        <Skills />
+        <AboutMe />
+        <Interests />
+        
       </main>
       <BackToTop home={"Home"} />
       <Footer />
