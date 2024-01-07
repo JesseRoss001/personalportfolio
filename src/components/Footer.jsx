@@ -1,5 +1,5 @@
+import React from 'react'; // Ensure React is in scope
 import styled from "styled-components";
-// Components
 import SocialLinks from "./SocialLinks";
 
 const StyledFooter = styled.footer`
@@ -22,3 +22,4 @@ export default function Footer() {
     </StyledFooter>
   );
 }
+

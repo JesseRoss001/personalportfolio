@@ -1,77 +1,65 @@
 import React from 'react';
-import { useAppContext } from "../appContext";
 import { Col, Container, Row } from 'react-bootstrap';
-import styled, { keyframes } from 'styled-components';
+import { useAppContext } from "../appContext"; 
+import styled, { keyframes, css } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserGraduate, faCode, faLightbulb } from '@fortawesome/free-solid-svg-icons';
 
-const fadeInUp = keyframes`
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+// Define your keyframes as usual
+const lightModeKeyframe = keyframes`
+  0% { background: #a1c4fd; }
+  50% { background: #c2e9fb; }
+  100% { background: #a1c4fd; }
 `;
 
+const darkModeKeyframe = keyframes`
+  0% { background: #333; }
+  50% { background: #222; }
+  100% { background: #111; }
+`;
+
+// Create a mixin for the gradient animation
+const gradientAnimation = css`
+  animation: ${({ theme }) => theme === "light"
+    ? css`${lightModeKeyframe} 10s ease infinite`
+    : css`${darkModeKeyframe} 10s ease infinite`};
+`;
+
+// Apply the animation mixin to your component
 const StyledAboutMe = styled.section`
-  background: ${({ theme }) => theme === "light" 
-    ? "linear-gradient(135deg, #E1D9D1 0%, #F7F7F7 100%)" 
-    : "linear-gradient(135deg, #20232a 0%, #333842 100%)"};
-  color: ${({ theme }) => theme === "light" ? "#282c34" : "#fff"};
+  ${gradientAnimation}
   padding: 4rem 0;
   text-align: center;
-  border-top: 1px solid #61DBFB;
-  border-bottom: 1px solid #61DBFB;
-  animation: ${fadeInUp} 1s ease-out;
-
+  position: relative;
+  z-index: 1;
+  background: ${({ theme }) => theme === "light"
+    ? "linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%)"
+    : "linear-gradient(120deg, #232526 0%, #414345 100%)"};
+  color: ${({ theme }) => theme === "light" ? "#282c34" : "#fff"};
+  
   .about-title {
-    color: ${({ theme }) => theme === "light" ? "#000" : "#fff"};
+    color: inherit;
     font-weight: 900;
     margin-bottom: 2rem;
     text-align: center;
     font-size: 2.5rem;
   }
 
-  .icon {
-    color: #61DBFB;
-    margin-bottom: 1rem;
-  }
-
-  h3 {
-    color: ${({ theme }) => theme === "light" ? "#000" : "#fff"};
-    font-weight: 700;
-    margin-bottom: 1rem;
-  }
-
   .about-card {
-    background: ${({ theme }) => theme === "light" ? "rgba(255, 255, 255, 0.9)" : "rgba(50, 50, 50, 0.9)"};
+    background: ${({ theme }) => theme === 'light' ? 'rgba(255, 255, 255, 0.9)' : 'rgba(50, 50, 50, 0.9)'};
     padding: 2rem;
     margin-bottom: 2rem;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(10px);
-    border: ${({ theme }) => theme === "light" ? "1px solid rgba(255, 255, 255, 0.18)" : "1px solid rgba(0, 0, 0, 0.3)"};
-    transition: transform 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.18);
     min-height: 250px;
-
-    &:hover {
-      transform: translateY(-5px);
-      box-shadow: ${({ theme }) => theme === "light" ? "0 8px 16px rgba(0, 0, 0, 0.2)" : "0 12px 24px rgba(0, 0, 0, 0.2)"};
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .about-card {
-      min-height: auto;
-    }
+    transition: transform 0.3s ease;
   }
 `;
 
-export default function AboutMe() {
-  const { theme } = useAppContext();
+const AboutMe = () => {
+  const { theme } = useAppContext(); // Make sure to have theme state in your context
 
   return (
     <StyledAboutMe theme={theme}>
@@ -109,4 +97,6 @@ export default function AboutMe() {
       </Container>
     </StyledAboutMe>
   );
-}
+};
+
+export default AboutMe;
