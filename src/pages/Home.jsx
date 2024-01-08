@@ -28,10 +28,10 @@ export default function Home() {
       <Projects />
         
         <Contact />
-        <Skills />
+        
         <AboutMe />
         <Interests />
-        
+        <Skills />
       </main>
       <BackToTop home={"Home"} />
       <Footer />

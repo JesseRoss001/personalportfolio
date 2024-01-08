@@ -27,16 +27,17 @@ const gradientAnimation = css`
 
 // Apply the animation mixin to your component
 const StyledAboutMe = styled.section`
-  ${gradientAnimation}
   padding: 4rem 0;
   text-align: center;
   position: relative;
   z-index: 1;
   border-top: 5px solid #ace5ee; /* Light electric blue color */
 
-  background: ${({ theme }) => theme === "light"
-    ? "linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%)"
-    : "linear-gradient(120deg, #232526 0%, #414345 100%)"};
+  background: ${({ theme }) =>
+    theme === 'light'
+      ? 'linear-gradient(120deg, #e0eafc 0%, #7DF9FF 100%)'
+      : 'linear-gradient(120deg, #28242c 10%, #7DF9FF 100%)'
+  };
   color: ${({ theme }) => theme === "light" ? "#282c34" : "#fff"};
   
   .about-title {
@@ -48,7 +49,7 @@ const StyledAboutMe = styled.section`
   }
 
   .about-card {
-    background: ${({ theme }) => theme === 'light' ? 'rgba(255, 255, 255, 0.9)' : 'rgba(50, 50, 50, 0.9)'};
+    background: ${({ theme }) => theme === 'light' ? 'rgba(225, 217, 209 , 0.9)' : 'rgba(50, 50, 50, 0.9)'};
     padding: 2rem;
     margin-bottom: 2rem;
     border-radius: 15px;
@@ -68,7 +69,7 @@ const AboutMe = () => {
   const { theme } = useAppContext(); // Make sure to have theme state in your context
 
   return (
-    <StyledAboutMe theme={theme}>
+    <StyledAboutMe theme={theme} id="AboutMe">
       <Container>
         <h2 className="about-title">About Me</h2>
         <Row className="justify-content-center">

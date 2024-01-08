@@ -157,21 +157,9 @@ export default function Skills() {
               </Col>
             ))}
           </Row>
-          {resume && (
-            <a href={resume} target="_blank" rel="noopener noreferrer">
-              <Button
-                size="lg"
-                variant={theme === "light" ? "outline-dark" : "outline-light"}
-                className="mt-5"
-              >
-                Résumé
-              </Button>
-            </a>
-          )}
+
         </Container>
-        <BottomDiv theme={theme}>
-          {/* Additional content or decoration can go here */}
-        </BottomDiv>
+
       </Section>
     </Element>
   );

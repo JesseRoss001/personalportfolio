@@ -16,7 +16,7 @@ import styled, { keyframes } from 'styled-components';
 
 // Styled components
 const ProjectsContainer = styled(Container)`
-
+margin-bottom:20px;
 `;
 
 const ProjectRow = styled(Row)`
@@ -56,7 +56,7 @@ const ExpandButton = styled.button`
   margin-top: 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-
+ border-radius: 10px;
   &:hover {
     background: ${({ theme }) => (theme === 'light' ? '#ddd' : '#555')};
   }

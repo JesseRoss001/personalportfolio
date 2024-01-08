@@ -1,0 +1,37 @@
+/* Define animation keyframes for upward growth */
+@keyframes grow-upwards {
+    0% {
+      transform: translateY(100%); /* Start offscreen above */
+      --branch-width: var(--border-width);
+      --branch-length: 0;
+    }
+    100% {
+      transform: translateY(0); /* End at the bottom */
+      --branch-width: var(--border-width) / 2;
+      --branch-length: var(--border-width) * 2;
+    }
+  }
+  
+  /* Generate additional branches after each animation cycle */
+  .fractal-border::after {
+    content: "";
+    position: absolute;
+    top: 0; /* Start branches from the top */
+    left: 50%;
+    transform: translateX(-50%);
+    width: var(--border-width);
+    height: 0;
+    border-bottom: var(--border-width) solid var(--color);
+    background-color: transparent;
+    animation: inherit;
+    animation-delay: var(--growth-speed);
+  }
+  
+  /* Create nested branches for each iteration */
+  @for $i from 1 to var(--iteration-count) {
+    .fractal-border:nth-child(#{$i})::after {
+      transform: rotate(calc(#{$i - 1} * #{$angle-offset}));
+      --branch-width: var(--border-width) / (2 ^ $i);
+      --branch-length: var(--border-width) * (2 ^ $i);
+    }
+  }

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectData } from '../pages/homeSlice';
 import { Link } from 'react-scroll';
-import styled, { createGlobalStyle, keyframes, css } from 'styled-components';
+import styled, { createGlobalStyle, keyframes, css} from 'styled-components';
 import { useAppContext } from '../appContext';
 import { Icon } from '@iconify/react';
 import { Col, Container, Row } from 'react-bootstrap';
@@ -90,14 +90,17 @@ const ImageWrapper = styled.div`
 `;
 
 const GlassDiv = styled.div`
-  backdrop-filter: blur(2px);
+  
   padding: 2rem;
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.3);
   margin-bottom: 2rem;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
-  
+  font-size:20px;
+  text-shadow: 1px 1px #888;
+  animation: ${({ theme }) => theme === 'light' ? css`${textPopAnimationLight} 8s infinite` : css`${textPopAnimationDark} 8s infinite`};
+  color: ${({ theme }) => theme === 'light' ? '#333' : '#E1D9D1'};
   &:hover {
     transform: translateY(-10px) scale(1.01);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
@@ -125,18 +128,44 @@ color: ${({ theme }) => theme === 'light' ? '#333' : '#fff'};
 export default function Hero() {
   const { name } = useSelector(selectData);
   const { theme } = useAppContext();
+  const [copiedText, setCopiedText] = useState('');
 
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text);
+    setCopiedText(text);
+    setTimeout(() => setCopiedText(''), 2000); // Hide the message after 2 seconds
+  };
   return (
     <>
       <GlobalStyle />
-      <StyledHero theme={theme}>
-        <Container fluid>
+      <StyledHero  theme={theme}>
+      <Container fluid>
           <Row className="align-items-center justify-content-center text-center">
             <Col xs={12} md={7} lg={6} className="d-flex align-items-center justify-content-center">
               <GlassDiv theme={theme}>
                 <Title theme={theme}>{name}</Title>
                 <Subheading theme={theme}>Junior Full Stack Developer</Subheading>
                 <SocialLinks />
+                {/* Button for downloading CV */}
+                <a 
+              className={`btn btn-${theme} m-5`} 
+              href="https://docs.google.com/document/d/1CFNyl5yqNrRDaf-oFHH_xdxAmpl8BM7glhtOkLSN86k/edit?usp=sharing" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              Download CV
+            </a>
+                {/* Contact Information */}
+                <div className="contact-info">
+          <p onClick={() => copyToClipboard('jesseross001@gmail.com')}>
+            Email: jesseross001@gmail.com
+            {copiedText === 'jesseross001@gmail.com' && <span> Copied to clipboard!</span>}
+          </p>
+          <p onClick={() => copyToClipboard('+447367292269')}>
+            Phone: +447367292269
+            {copiedText === '+447367292269' && <span> Copied to clipboard!</span>}
+          </p>
+        </div>
               </GlassDiv>
             </Col>
             <Col xs={12} md={5} lg={6} className="d-flex justify-content-center pb-4">

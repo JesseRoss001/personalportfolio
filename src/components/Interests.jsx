@@ -87,7 +87,7 @@ export default function Interests() {
   ];
 
   return (
-    <StyledInterests theme={theme}>
+    <StyledInterests theme={theme} id="Interests">
       <h2 className="interest-title">My Interests</h2>
       <Container>
         <Row className="masonry-grid">

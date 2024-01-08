@@ -87,11 +87,9 @@ export const skillData = [
     skill: <Icon icon="mdi:react" className="display-4" />,
     name: "React",
   },
-  {
-    id: 7,
-    skill: <Icon icon="akar-icons:redux-fill" className="display-4" />,
-    name: "Redux",
-  },
+  
+  
+  
   {
     id: 8,
     skill: <Icon icon="bi:git" className="display-4" />,
@@ -210,51 +208,20 @@ export const skillData = [
     skill: <Icon icon="mdi:language-python" className="display-4" />,
     name: "Python (Programming Language)",
   },
-  {
-    id: 35,
-    skill: <Icon icon="mdi:language-php" className="display-4" />,
-    name: "PHP",
-  },
-  {
-    id: 36,
-    skill: <Icon icon="mdi:language-java" className="display-4" />,
-    name: "Java",
-  },
-  {
-    id: 37,
-    skill: <Icon icon="mdi:vuejs" className="display-4" />,
-    name: "Vue.js",
-  },
-  {
-    id: 38,
-    skill: <Icon icon="mdi:angular" className="display-4" />,
-    name: "Angular",
-  },
+
   {
     id: 40,
     skill: <Icon icon="mdi:language-typescript" className="display-4" />,
     name: "TypeScript",
   },
-  {
-    id: 41,
-    skill: <Icon icon="mdi:graphql" className="display-4" />,
-    name: "GraphQL",
-  },
+  
   {
     id: 42,
     skill: <Icon icon="mdi:nodejs" className="display-4" />,
     name: "Node.js",
   },
-  {
-    id: 43,
-    skill: <Icon icon="mdi:amazon-aws" className="display-4" />,
-    name: "AWS",
-  },
-  {
-    id: 44,
-    skill: <Icon icon="mdi:docker" className="display-4" />,
-    name: "Docker",
-  },
+
+
   {
     id: 45,
     skill: <Icon icon="mdi:account-group" className="display-4" />,
