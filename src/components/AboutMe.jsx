@@ -32,6 +32,8 @@ const StyledAboutMe = styled.section`
   text-align: center;
   position: relative;
   z-index: 1;
+  border-top: 5px solid #ace5ee; /* Light electric blue color */
+
   background: ${({ theme }) => theme === "light"
     ? "linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%)"
     : "linear-gradient(120deg, #232526 0%, #414345 100%)"};
@@ -55,6 +57,10 @@ const StyledAboutMe = styled.section`
     border: 1px solid rgba(255, 255, 255, 0.18);
     min-height: 250px;
     transition: transform 0.3s ease;
+    &:hover {
+      transform: translateY(-10px) scale(1.01);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+    }
   }
 `;
 
