@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/your-app/static/css/main.7e2b7e60.css",
-    "main.js": "/your-app/static/js/main.d1f3a57a.js",
+    "main.js": "/your-app/static/js/main.f4acf043.js",
     "static/media/backgroundLighti.jpg": "/your-app/static/media/backgroundLighti.f1bd315dc512386fe962.jpg",
     "static/media/backgroundDarki.jpg": "/your-app/static/media/backgroundDarki.f67df21510d349926aff.jpg",
     "static/media/contactimage.png": "/your-app/static/media/contactimage.5929a491a7b3f6139245.png",
@@ -21,10 +21,10 @@
     "index.html": "/your-app/index.html",
     "static/media/logoDark.svg": "/your-app/static/media/logoDark.ad1e2c4e48e86b46528db49385e2f885.svg",
     "main.7e2b7e60.css.map": "/your-app/static/css/main.7e2b7e60.css.map",
-    "main.d1f3a57a.js.map": "/your-app/static/js/main.d1f3a57a.js.map"
+    "main.f4acf043.js.map": "/your-app/static/js/main.f4acf043.js.map"
   },
   "entrypoints": [
     "static/css/main.7e2b7e60.css",
-    "static/js/main.d1f3a57a.js"
+    "static/js/main.f4acf043.js"
   ]
 }
