@@ -13,7 +13,7 @@ import {  Loading } from "./globalStyledComponents";
 import StyledCard from "./StyledCard";
 import styled, { keyframes } from 'styled-components';
 
-
+import preFetchedProjects from '../data/githubProjects.json'; // Adjust path as necessary
 // Styled components
 const ProjectsContainer = styled(Container)`
 margin-bottom:20px;
@@ -73,58 +73,12 @@ export default function Projects() {
   const data = useSelector(selectData);
 
   useEffect(() => {
-    async function fetchAndSortRepos() {
-      const token = process.env.REACT_APP_GITHUB_TOKEN;
-      const headers = {
-        'Authorization': `token ${token}`
-      };
-
-      try {
-        const reposResponse = await fetch(`https://api.github.com/users/${githubUsername}/repos`, { headers });
-        if (!reposResponse.ok) {
-          throw new Error(`GitHub API responded with status code: ${reposResponse.status}`);
-        }
-        const repos = await reposResponse.json();
-
-        const reposWithCommits = await Promise.all(repos.map(async (repo) => {
-          const commitsResponse = await fetch(`https://api.github.com/repos/${repo.full_name}/commits`, { headers });
-          if (!commitsResponse.ok) {
-            console.error(`Error fetching commits for repo: ${repo.name}`);
-            return { ...repo, latestCommitDate: null };
-          }
-          const commits = await commitsResponse.json();
-          const latestCommitDate = new Date(commits[0].commit.committer.date);
-
-          // Fetch README for the image
-          const readmeResponse = await fetch(`https://api.github.com/repos/${repo.full_name}/readme`, { headers });
-          if (!readmeResponse.ok) {
-            console.error(`Error fetching README for repo: ${repo.name}`);
-            return { ...repo, imageUrl: null, latestCommitDate };
-          }
-          const readmeData = await readmeResponse.json();
-          const readmeContent = atob(readmeData.content);
-          const imageUrlMatch = readmeContent.match(/\!\[.*?\]\((.*?)\)/);
-          const imageUrl = imageUrlMatch ? imageUrlMatch[1] : null;
-
-          return { ...repo, imageUrl, latestCommitDate };
-        }));
-
-        // Sort by latest commit date
-        reposWithCommits.sort((a, b) => b.latestCommitDate - a.latestCommitDate);
-
-        setAllProjects(reposWithCommits);
-        setDisplayedProjects(reposWithCommits.slice(0, 6));
-      } catch (error) {
-        console.error('Error occurred while fetching repositories:', error);
-      }
-    }
-
-    fetchAndSortRepos();
-  }, []);
+    setDisplayedProjects(preFetchedProjects.slice(0, 12)); // Display top 6 projects
+}, []);
 
   const handleExpandClick = () => {
     setIsExpanded(!isExpanded);
-    setDisplayedProjects(allProjects.slice(0, isExpanded ? 6 : 12));
+    setDisplayedProjects(allProjects.slice(0, isExpanded ? 12 : 18));
   };
 
   return (
@@ -139,20 +93,19 @@ export default function Projects() {
               Oops, you do not have any GitHub projects yet...
             </h2>
           )}
-          <ProjectRow xs={1} md={2} lg={3} className="g-4 m-4 justify-content-center">
-            {displayedProjects.map(({ id, imageUrl, name, description, html_url, homepage }) => (
-              <ProjectCol key={id}>
-                <StyledCard
-                  image={imageUrl}
-                  name={name}
-                  description={description}
-                  url={html_url}
-                  demo={homepage}
-                />
-              </ProjectCol>
-            ))}
-          </ProjectRow>
-          {!isExpanded && allProjects.length > 6 && (
+           <ProjectRow xs={1} md={2} lg={3} className="g-4 m-4 justify-content-center">
+      {displayedProjects.map(({ id, imageUrl, name, description, html_url }) => (
+        <ProjectCol key={id}>
+          <StyledCard
+            image={imageUrl} // Use the image from README
+            name={name}
+            description={description}
+            url={html_url}
+          />
+        </ProjectCol>
+      ))}
+    </ProjectRow>
+          {!isExpanded && allProjects.length > 12 && (
             <div className="text-center mt-5">
               <ExpandButton onClick={handleExpandClick} theme={theme}>
                 Show More
