@@ -149,7 +149,7 @@ export default function Hero() {
                 {/* Button for downloading CV */}
                 <a 
               className={`btn btn-${theme} m-5`} 
-              href="https://docs.google.com/document/d/1CFNyl5yqNrRDaf-oFHH_xdxAmpl8BM7glhtOkLSN86k/edit?usp=sharing" 
+              href="https://docs.google.com/document/d/10C2MLR1dcGoMc9vj-AIgFy3c-Z-BAnc3Qwywi4iR-88/edit?usp=sharing"
               target="_blank" 
               rel="noopener noreferrer"
             >
